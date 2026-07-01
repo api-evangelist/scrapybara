@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scrapybara API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "x-api-key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Start instance", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/start",
+            "body": { "type": "json", "data": "{\"instance_type\":\"ubuntu\",\"timeout_hours\":1}" }
+          },
+          "docs": "Start a new cloud instance of type ubuntu, browser, or windows."
+        },
+        {
+          "info": { "name": "List all instances", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.scrapybara.com/v1/instances" },
+          "docs": "List all instances for the account."
+        },
+        {
+          "info": { "name": "Get instance by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Get details of a single instance."
+        },
+        {
+          "info": { "name": "Stop instance", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/stop",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Terminate the instance and release resources."
+        },
+        {
+          "info": { "name": "Pause instance", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/pause",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Pause the instance, preserving state for a later resume."
+        },
+        {
+          "info": { "name": "Resume instance", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/resume",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"timeout_hours\":1}" }
+          },
+          "docs": "Resume a previously paused instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Computer Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Take screenshot", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/screenshot",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Capture a base64-encoded screenshot of the instance desktop."
+        },
+        {
+          "info": { "name": "Get stream URL", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/stream-url",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Get the interactive streaming URL for the instance desktop."
+        },
+        {
+          "info": { "name": "Run computer actions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/computer",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"action\":\"click_mouse\",\"coordinates\":[100,200],\"button\":\"left\"}" }
+          },
+          "docs": "Run a computer action (move_mouse, click_mouse, drag_mouse, scroll, press_key, type_text, wait)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Browser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Start browser", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/start",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Start a Chromium browser on the instance."
+        },
+        {
+          "info": { "name": "Stop browser", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/stop",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Stop the Chromium browser on the instance."
+        },
+        {
+          "info": { "name": "Get CDP URL", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/cdp-url",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Get the Playwright Chrome DevTools Protocol URL for the browser."
+        },
+        {
+          "info": { "name": "Get current URL", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/current-url",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Get the current URL open in the browser."
+        },
+        {
+          "info": { "name": "Authenticate with saved state", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/authenticate",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"auth_state_id\":\"\"}" }
+          },
+          "docs": "Load a previously saved auth state into the browser session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Code Execution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Run bash actions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/bash",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"command\":\"ls -la\"}" }
+          },
+          "docs": "Execute a bash command on the instance."
+        },
+        {
+          "info": { "name": "Execute code", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/code/execute",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"code\":\"print('hi')\",\"kernel_name\":\"python3\"}" }
+          },
+          "docs": "Execute code against a named kernel on the instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Filesystem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Run file actions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/file",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"command\":\"read\",\"path\":\"/root/notes.txt\"}" }
+          },
+          "docs": "Read, write, list, or delete files on the instance."
+        },
+        {
+          "info": { "name": "Run edit actions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/edit",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"command\":\"create\",\"path\":\"/root/notes.txt\",\"file_text\":\"hello\"}" }
+          },
+          "docs": "Run a text-editor file action (view, create, str_replace, insert, undo_edit)."
+        },
+        {
+          "info": { "name": "Upload file", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/upload",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "multipart-form", "data": [] }
+          },
+          "docs": "Upload a binary file to a path on the instance filesystem."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notebook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List kernels", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/kernels",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "List available Jupyter kernels on the instance."
+        },
+        {
+          "info": { "name": "Create notebook", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"name\":\"analysis\",\"kernel_name\":\"python3\"}" }
+          },
+          "docs": "Create a Jupyter notebook on the instance."
+        },
+        {
+          "info": { "name": "Add cell", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id/cells",
+            "params": [
+              { "name": "instance_id", "value": "", "type": "path" },
+              { "name": "notebook_id", "value": "", "type": "path" }
+            ],
+            "body": { "type": "json", "data": "{\"type\":\"code\",\"content\":\"1+1\"}" }
+          },
+          "docs": "Add a cell to a notebook."
+        },
+        {
+          "info": { "name": "Execute all cells", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id/execute",
+            "params": [
+              { "name": "instance_id", "value": "", "type": "path" },
+              { "name": "notebook_id", "value": "", "type": "path" }
+            ]
+          },
+          "docs": "Execute all cells in a notebook."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auth States",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Save auth state", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/save-auth",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"name\":\"my-login\"}" }
+          },
+          "docs": "Save the current browser session as a reusable auth state."
+        },
+        {
+          "info": { "name": "List auth states", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.scrapybara.com/v1/auth-states" },
+          "docs": "List saved browser auth states for the account."
+        },
+        {
+          "info": { "name": "Modify auth state", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/auth-states/:auth_state_id",
+            "params": [
+              { "name": "instance_id", "value": "", "type": "path" },
+              { "name": "auth_state_id", "value": "", "type": "path" }
+            ],
+            "body": { "type": "json", "data": "{\"name\":\"renamed-login\"}" }
+          },
+          "docs": "Modify a saved auth state."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Environment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get environment variables", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/env",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ]
+          },
+          "docs": "Get environment variables set on the instance."
+        },
+        {
+          "info": { "name": "Set environment variables", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/env",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"variables\":{\"API_KEY\":\"value\"}}" }
+          },
+          "docs": "Set environment variables on the instance."
+        },
+        {
+          "info": { "name": "Delete environment variables", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/env",
+            "params": [ { "name": "instance_id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"keys\":[\"API_KEY\"]}" }
+          },
+          "docs": "Delete environment variables from the instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

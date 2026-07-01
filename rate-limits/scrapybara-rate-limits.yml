@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Scrapybara
+providerId: scrapybara
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: false
+tags:
+- AI Agents
+- Virtual Desktops
+- Computer Use
+- Browser Automation
+- Rate Limiting
+- Quotas
+- Concurrency
+description: >-
+  Scrapybara constrains usage primarily through concurrency and consumption
+  quotas rather than published per-second request rates. Each plan caps the
+  number of concurrent instances (Free 5, Basic 25, Pro 100) and meters monthly
+  compute hours and agent credits; instances also carry a per-instance
+  timeout_hours (0.01 to 24) after which they auto-terminate. Specific
+  per-endpoint request-per-second limits are not published and are not
+  reconciled in this artifact.
+notes: >-
+  Verify concurrency caps, compute-hour and agent-credit quotas, and any
+  per-endpoint throttling in the Scrapybara dashboard and docs during
+  reconciliation.
+sources:
+- https://scrapybara.com/pricing
+- https://docs.scrapybara.com
+- https://docs.scrapybara.com/api-reference/start
+responseCodes:
+  throttled: 429
+limits:
+- name: Concurrent Instances
+  scope: account
+  metric: instances
+  limit: 5 (Free) / 25 (Basic) / 100 (Pro)
+  notes: Maximum number of instances that can run simultaneously, set by plan tier.
+- name: Compute Hours
+  scope: account
+  metric: hours
+  limit: 10 (Free) / 100 (Basic) / 500 (Pro) per month
+  notes: Monthly running-time allotment; overage billed per hour or blocked per plan.
+- name: Agent Credits
+  scope: account
+  metric: credits
+  limit: 100 (Free) / 500 (Basic) / 2500 (Pro) per month
+  notes: One credit per agent step; top-ups available at $0.04 per credit on paid plans.
+- name: Instance Timeout
+  scope: instance
+  metric: hours
+  limit: 0.01 to 24
+  notes: Each instance auto-terminates after its configured timeout_hours.
+policies:
+- name: Concurrency-Based Limiting
+  description: Usage is gated primarily by concurrent-instance caps per plan rather than request-per-second throttling.
+- name: Auto-Termination
+  description: Instances stop automatically at timeout_hours to prevent runaway compute-hour consumption.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

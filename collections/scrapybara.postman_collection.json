@@ -1,0 +1,340 @@
+{
+  "info": {
+    "name": "Scrapybara API",
+    "description": "Scrapybara provides virtual desktops for AI agents - remote ubuntu, browser, and windows instances driven over a single x-api-key REST API. Base URL https://api.scrapybara.com/v1.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-api-key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.scrapybara.com/v1", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" },
+    { "key": "instance_id", "value": "", "type": "string" },
+    { "key": "notebook_id", "value": "", "type": "string" },
+    { "key": "auth_state_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Instances",
+      "item": [
+        {
+          "name": "Start instance",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"instance_type\": \"ubuntu\",\n  \"timeout_hours\": 1\n}" },
+            "url": { "raw": "{{baseUrl}}/start", "host": [ "{{baseUrl}}" ], "path": [ "start" ] },
+            "description": "Start a new cloud instance of type ubuntu, browser, or windows."
+          }
+        },
+        {
+          "name": "List all instances",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances", "host": [ "{{baseUrl}}" ], "path": [ "instances" ] },
+            "description": "List all instances for the account."
+          }
+        },
+        {
+          "name": "Get instance by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}" ] },
+            "description": "Get details of a single instance."
+          }
+        },
+        {
+          "name": "Stop instance",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/stop", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "stop" ] },
+            "description": "Terminate the instance and release resources."
+          }
+        },
+        {
+          "name": "Pause instance",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/pause", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "pause" ] },
+            "description": "Pause the instance, preserving state for a later resume."
+          }
+        },
+        {
+          "name": "Resume instance",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"timeout_hours\": 1\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/resume", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "resume" ] },
+            "description": "Resume a previously paused instance."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Computer Actions",
+      "item": [
+        {
+          "name": "Take screenshot",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/screenshot", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "screenshot" ] },
+            "description": "Capture a base64-encoded screenshot of the instance desktop."
+          }
+        },
+        {
+          "name": "Get stream URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/stream-url", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "stream-url" ] },
+            "description": "Get the interactive streaming URL for the instance desktop."
+          }
+        },
+        {
+          "name": "Run computer actions",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"action\": \"click_mouse\",\n  \"coordinates\": [100, 200],\n  \"button\": \"left\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/computer", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "computer" ] },
+            "description": "Run a computer action (move_mouse, click_mouse, drag_mouse, scroll, press_key, type_text, wait)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Browser",
+      "item": [
+        {
+          "name": "Start browser",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/browser/start", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "browser", "start" ] },
+            "description": "Start a Chromium browser on the instance."
+          }
+        },
+        {
+          "name": "Stop browser",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/browser/stop", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "browser", "stop" ] },
+            "description": "Stop the Chromium browser on the instance."
+          }
+        },
+        {
+          "name": "Get CDP URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/browser/cdp-url", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "browser", "cdp-url" ] },
+            "description": "Get the Playwright Chrome DevTools Protocol URL for the browser."
+          }
+        },
+        {
+          "name": "Get current URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/browser/current-url", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "browser", "current-url" ] },
+            "description": "Get the current URL open in the browser."
+          }
+        },
+        {
+          "name": "Authenticate with saved state",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"auth_state_id\": \"{{auth_state_id}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/browser/authenticate", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "browser", "authenticate" ] },
+            "description": "Load a previously saved auth state into the browser session."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Code Execution",
+      "item": [
+        {
+          "name": "Run bash actions",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"command\": \"ls -la\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/bash", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "bash" ] },
+            "description": "Execute a bash command on the instance."
+          }
+        },
+        {
+          "name": "Execute code",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"code\": \"print('hi')\",\n  \"kernel_name\": \"python3\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/code/execute", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "code", "execute" ] },
+            "description": "Execute code against a named kernel on the instance."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Filesystem",
+      "item": [
+        {
+          "name": "Run file actions",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"command\": \"read\",\n  \"path\": \"/root/notes.txt\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/file", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "file" ] },
+            "description": "Read, write, list, or delete files on the instance."
+          }
+        },
+        {
+          "name": "Run edit actions",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"command\": \"create\",\n  \"path\": \"/root/notes.txt\",\n  \"file_text\": \"hello\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/edit", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "edit" ] },
+            "description": "Run a text-editor file action (view, create, str_replace, insert, undo_edit)."
+          }
+        },
+        {
+          "name": "Upload file",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": { "mode": "formdata", "formdata": [ { "key": "file", "type": "file", "src": [] }, { "key": "path", "value": "/root/upload.bin", "type": "text" } ] },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/upload", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "upload" ] },
+            "description": "Upload a binary file to a path on the instance filesystem."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notebook",
+      "item": [
+        {
+          "name": "List kernels",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/notebooks/kernels", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "notebooks", "kernels" ] },
+            "description": "List available Jupyter kernels on the instance."
+          }
+        },
+        {
+          "name": "Create notebook",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"analysis\",\n  \"kernel_name\": \"python3\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/notebooks", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "notebooks" ] },
+            "description": "Create a Jupyter notebook on the instance."
+          }
+        },
+        {
+          "name": "Add cell",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"type\": \"code\",\n  \"content\": \"1+1\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/notebooks/{{notebook_id}}/cells", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "notebooks", "{{notebook_id}}", "cells" ] },
+            "description": "Add a cell to a notebook."
+          }
+        },
+        {
+          "name": "Execute all cells",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/notebooks/{{notebook_id}}/execute", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "notebooks", "{{notebook_id}}", "execute" ] },
+            "description": "Execute all cells in a notebook."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth States",
+      "item": [
+        {
+          "name": "Save auth state",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"my-login\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/browser/save-auth", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "browser", "save-auth" ] },
+            "description": "Save the current browser session as a reusable auth state."
+          }
+        },
+        {
+          "name": "List auth states",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/auth-states", "host": [ "{{baseUrl}}" ], "path": [ "auth-states" ] },
+            "description": "List saved browser auth states for the account."
+          }
+        },
+        {
+          "name": "Modify auth state",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"renamed-login\"\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/auth-states/{{auth_state_id}}", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "auth-states", "{{auth_state_id}}" ] },
+            "description": "Modify a saved auth state."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Environment",
+      "item": [
+        {
+          "name": "Get environment variables",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/env", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "env" ] },
+            "description": "Get environment variables set on the instance."
+          }
+        },
+        {
+          "name": "Set environment variables",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"variables\": { \"API_KEY\": \"value\" }\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/env", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "env" ] },
+            "description": "Set environment variables on the instance."
+          }
+        },
+        {
+          "name": "Delete environment variables",
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"keys\": [\"API_KEY\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/instances/{{instance_id}}/env", "host": [ "{{baseUrl}}" ], "path": [ "instances", "{{instance_id}}", "env" ] },
+            "description": "Delete environment variables from the instance."
+          }
+        }
+      ]
+    }
+  ]
+}

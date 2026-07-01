@@ -1,0 +1,102 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Scrapybara
+providerId: scrapybara
+created: '2026-07-01'
+modified: '2026-07-01'
+reconciled: true
+tags:
+- AI Agents
+- Virtual Desktops
+- Computer Use
+- Browser Automation
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Scrapybara spend. Scrapybara bills a monthly plan subscription
+  (Free / Basic / Pro / Enterprise) that bundles compute hours, agent credits,
+  and concurrent instances. The two primary consumption meters are compute hours
+  (time an instance is running) and agent credits (one per agent step); extra
+  agent credits are billed per credit, or customers can bring their own model
+  provider API key to avoid credit consumption.
+notes: >-
+  Plan allotments and per-credit rates are subject to change; verify against the
+  Scrapybara pricing page during reconciliation.
+sources:
+- https://scrapybara.com/pricing
+- https://docs.scrapybara.com
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Scrapybara
+serviceCategory: Compute
+billingModel:
+  pricingCategory: Subscription-Plus-Usage
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Scrapybara Virtual Desktops
+  ServiceCategory: Compute
+  ProviderName: Scrapybara
+  PublisherName: Scrapybara
+  InvoiceIssuerName: Scrapybara
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Plus-Usage
+meters:
+- name: compute_hours
+  description: Hours an instance (ubuntu / browser / windows) is running, drawn from the plan allotment then billed per hour.
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - account
+  - instance
+  - instance_type
+- name: agent_credits
+  description: Agent steps consumed via the Act SDK or playground, one credit per step.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+  - instance
+- name: extra_agent_credits
+  description: Agent credits purchased beyond the plan allotment at $0.04 each.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+- name: concurrent_instances
+  description: Peak number of simultaneously running instances, capped by plan tier.
+  unit: instances
+  aggregation: max
+  dimensions:
+  - account
+- name: plan_subscription
+  description: Flat monthly plan fee (Basic $29, Pro $99, Enterprise custom).
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+principles:
+- name: Visibility
+  description: Track compute-hour and agent-credit burn per instance and workload in the Scrapybara dashboard.
+- name: Allocation
+  description: Tag instances and API keys per team/workload; map compute hours and credits to internal cost centers.
+- name: Optimization
+  description: Set tight timeout_hours, pause idle instances, reuse saved auth states to cut steps, and bring your own provider API key to avoid agent-credit charges.
+- name: Accountability
+  description: Assign owners per project; review monthly compute hours and agent-credit consumption against plan allotments and budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

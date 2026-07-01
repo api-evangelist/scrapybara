@@ -1,0 +1,98 @@
+aid: scrapybara
+name: Scrapybara
+review:
+  question: Does Scrapybara expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-01'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Scrapybara's public API is REST/HTTPS
+    over https://api.scrapybara.com/v1 authenticated with the x-api-key
+    header. The interactive desktop stream is delivered as a hosted
+    stream URL (returned by GET /instances/{id}/stream-url) and browser
+    control is performed by connecting Playwright to a Chrome DevTools
+    Protocol (CDP) endpoint, not by calling a documented Scrapybara
+    WebSocket API surface. No first-party ws:// or wss:// API is documented.
+findings:
+  summary: |
+    Scrapybara does not publish a documented public WebSocket API. The
+    documented API is REST/HTTPS under https://api.scrapybara.com/v1 with
+    x-api-key authentication. Two transports touch real-time/streaming but
+    are not first-party Scrapybara WebSocket APIs: (1) the interactive
+    desktop stream is a hosted stream URL clients open in a viewer, and
+    (2) browser automation uses the Chrome DevTools Protocol (CDP) URL
+    returned by the API, which callers connect to with Playwright. CDP
+    itself runs over WebSocket at the browser layer, but it is a standard
+    Chromium protocol surfaced for the customer's own Playwright client,
+    not a documented Scrapybara application API.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.scrapybara.com/v1
+      documented: true
+    - protocol: CDP (Chrome DevTools Protocol)
+      scheme: ws
+      note: The API returns a CDP URL (GET /instances/{id}/browser/cdp-url) that the customer connects to with Playwright. This is standard Chromium CDP, not a documented Scrapybara application WebSocket API.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No first-party Scrapybara WebSocket application API is documented in the API reference.
+  endpointsConfirmedRest:
+    - POST   https://api.scrapybara.com/v1/start
+    - GET    https://api.scrapybara.com/v1/instances
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/stop
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/pause
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/resume
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/screenshot
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/stream-url
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/computer
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/bash
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/edit
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/file
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/upload
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/browser/start
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/browser/stop
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/browser/cdp-url
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/browser/current-url
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/browser/save-auth
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/browser/authenticate
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/auth-states/{auth_state_id}
+    - GET    https://api.scrapybara.com/v1/auth-states
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/code/execute
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/notebooks/kernels
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/notebooks
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/notebooks/{notebook_id}
+    - DELETE https://api.scrapybara.com/v1/instances/{instance_id}/notebooks/{notebook_id}
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/notebooks/{notebook_id}/cells
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/notebooks/{notebook_id}/cells/{cell_id}/execute
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/notebooks/{notebook_id}/execute
+    - GET    https://api.scrapybara.com/v1/instances/{instance_id}/env
+    - POST   https://api.scrapybara.com/v1/instances/{instance_id}/env
+    - DELETE https://api.scrapybara.com/v1/instances/{instance_id}/env
+sources:
+  - url: https://docs.scrapybara.com
+    type: Documentation
+    note: Overview of instances, computer use, browser, code execution, filesystem, notebooks; REST API with x-api-key.
+  - url: https://docs.scrapybara.com/api-reference/start
+    type: APIReference
+    note: Start instance endpoint documented as POST /v1/start with x-api-key header; no WebSocket surface.
+  - url: https://docs.scrapybara.com/browser
+    type: Documentation
+    note: Browser control via Playwright CDP URL and save/load auth states; no documented Scrapybara WebSocket API.
+  - url: https://github.com/Scrapybara/scrapybara-python
+    type: SDK
+    note: Python SDK methods map to REST endpoints under the v1 base path.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No first-party WebSocket application API exists to model. The interactive
+    stream is a hosted viewer URL and browser automation uses standard Chromium
+    CDP surfaced for the customer's own Playwright client, so no AsyncAPI
+    document was authored. The apis.yml catalogs the documented REST surfaces.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
