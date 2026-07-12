@@ -163,6 +163,10 @@ apis:
   description: Get, set, and delete environment variables on a running instance so
     agents and executed code can read API keys and configuration at runtime.
 common:
+- type: DomainSecurity
+  url: security/scrapybara-domain-security.yml
+- type: Authentication
+  url: authentication/scrapybara-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/scrapybara
 - type: LinkedIn
@@ -177,6 +181,8 @@ common:
   url: rate-limits/scrapybara-rate-limits.yml
 - type: FinOps
   url: finops/scrapybara-finops.yml
+- url: https://scrapybara.com/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
