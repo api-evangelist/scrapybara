@@ -163,6 +163,8 @@ apis:
   description: Get, set, and delete environment variables on a running instance so
     agents and executed code can read API keys and configuration at runtime.
 common:
+- type: AgenticAccess
+  url: agentic-access/scrapybara-agentic-access.yml
 - type: DomainSecurity
   url: security/scrapybara-domain-security.yml
 - type: Authentication
