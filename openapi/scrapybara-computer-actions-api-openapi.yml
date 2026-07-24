@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States Computer Actions API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Computer Actions
+paths:
+  /instances/{instance_id}/screenshot:
+    get:
+      operationId: takeScreenshot
+      tags:
+      - Computer Actions
+      summary: Take screenshot
+      description: Capture a base64-encoded screenshot of the instance desktop.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Screenshot captured
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base_64_image:
+                    type: string
+  /instances/{instance_id}/stream-url:
+    get:
+      operationId: getStreamUrl
+      tags:
+      - Computer Actions
+      summary: Get stream URL
+      description: Get the interactive streaming URL for the instance desktop.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Stream URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stream_url:
+                    type: string
+                    format: uri
+  /instances/{instance_id}/computer:
+    post:
+      operationId: runComputerAction
+      tags:
+      - Computer Actions
+      summary: Run computer actions
+      description: Run a computer action such as move_mouse, click_mouse, drag_mouse, scroll, press_key, type_text, wait, take_screenshot, get_cursor_position.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputerActionRequest'
+      responses:
+        '200':
+          description: Action result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputerActionResponse'
+components:
+  schemas:
+    ComputerActionResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        base_64_image:
+          type: string
+        cursor_position:
+          type: array
+          items:
+            type: integer
+    ComputerActionRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - move_mouse
+          - click_mouse
+          - drag_mouse
+          - scroll
+          - press_key
+          - type_text
+          - wait
+          - take_screenshot
+          - get_cursor_position
+        coordinates:
+          type: array
+          items:
+            type: integer
+        button:
+          type: string
+          enum:
+          - left
+          - right
+          - middle
+        text:
+          type: string
+        keys:
+          type: array
+          items:
+            type: string
+        duration:
+          type: number
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States Code Execution API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Code Execution
+paths:
+  /instances/{instance_id}/bash:
+    post:
+      operationId: runBash
+      tags:
+      - Code Execution
+      summary: Run bash actions
+      description: Execute a bash command on the instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                restart:
+                  type: boolean
+      responses:
+        '200':
+          description: Command output
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /instances/{instance_id}/code/execute:
+    post:
+      operationId: executeCode
+      tags:
+      - Code Execution
+      summary: Execute code
+      description: Execute code against a named kernel on the instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                kernel_name:
+                  type: string
+                timeout:
+                  type: integer
+      responses:
+        '200':
+          description: Execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+components:
+  schemas:
+    CommandResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        error:
+          type: string
+        exit_code:
+          type: integer
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

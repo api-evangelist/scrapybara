@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Auth States
+paths:
+  /instances/{instance_id}/browser/save-auth:
+    post:
+      operationId: saveAuth
+      tags:
+      - Auth States
+      summary: Save auth state
+      description: Save the current browser session as a reusable auth state.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Auth state saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthStateResponse'
+  /instances/{instance_id}/browser/authenticate:
+    post:
+      operationId: authenticateBrowser
+      tags:
+      - Auth States
+      summary: Authenticate with saved state
+      description: Load a previously saved auth state into the browser session.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                auth_state_id:
+                  type: string
+      responses:
+        '200':
+          description: Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+  /instances/{instance_id}/auth-states/{auth_state_id}:
+    post:
+      operationId: modifyAuth
+      tags:
+      - Auth States
+      summary: Modify auth state
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      - name: auth_state_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Auth state modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthStateResponse'
+  /auth-states:
+    get:
+      operationId: getAuthStates
+      tags:
+      - Auth States
+      summary: List auth states
+      responses:
+        '200':
+          description: List of auth states
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthStateResponse'
+components:
+  schemas:
+    AuthStateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

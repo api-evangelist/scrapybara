@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States Filesystem API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Filesystem
+paths:
+  /instances/{instance_id}/edit:
+    post:
+      operationId: runEdit
+      tags:
+      - Filesystem
+      summary: Run edit actions
+      description: Run a text-editor file action (view, create, str_replace, insert, undo_edit) against a path on the instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                path:
+                  type: string
+                file_text:
+                  type: string
+                old_str:
+                  type: string
+                new_str:
+                  type: string
+      responses:
+        '200':
+          description: Edit result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /instances/{instance_id}/file:
+    post:
+      operationId: runFile
+      tags:
+      - Filesystem
+      summary: Run file actions
+      description: Run a filesystem action (read, write, list, exists, delete) against a path on the instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                path:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: File action result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /instances/{instance_id}/upload:
+    post:
+      operationId: uploadFile
+      tags:
+      - Filesystem
+      summary: Upload file
+      description: Upload a binary file to a path on the instance filesystem.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                path:
+                  type: string
+      responses:
+        '200':
+          description: Upload result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+components:
+  schemas:
+    CommandResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        error:
+          type: string
+        exit_code:
+          type: integer
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

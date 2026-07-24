@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States Instances API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Instances
+paths:
+  /start:
+    post:
+      operationId: startInstance
+      tags:
+      - Instances
+      summary: Start instance
+      description: Start a new cloud instance of type ubuntu, browser, or windows.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartInstanceRequest'
+      responses:
+        '200':
+          description: Instance started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceResponse'
+  /instances:
+    get:
+      operationId: getInstances
+      tags:
+      - Instances
+      summary: List all instances
+      responses:
+        '200':
+          description: List of instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstanceResponse'
+  /instances/{instance_id}:
+    get:
+      operationId: getInstance
+      tags:
+      - Instances
+      summary: Get instance by ID
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Instance details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceResponse'
+  /instances/{instance_id}/stop:
+    post:
+      operationId: stopInstance
+      tags:
+      - Instances
+      summary: Stop instance
+      description: Terminate the instance and release its resources.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Instance stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+  /instances/{instance_id}/pause:
+    post:
+      operationId: pauseInstance
+      tags:
+      - Instances
+      summary: Pause instance
+      description: Pause the instance, preserving its state for a later resume.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Instance paused
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+  /instances/{instance_id}/resume:
+    post:
+      operationId: resumeInstance
+      tags:
+      - Instances
+      summary: Resume instance
+      description: Resume a previously paused instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                timeout_hours:
+                  type: number
+                  minimum: 0.01
+                  maximum: 24
+      responses:
+        '200':
+          description: Instance resumed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceResponse'
+components:
+  schemas:
+    InstanceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        launch_time:
+          type: string
+          format: date-time
+        instance_type:
+          type: string
+          enum:
+          - ubuntu
+          - browser
+          - windows
+        status:
+          type: string
+          enum:
+          - pending
+          - running
+          - paused
+          - resuming
+          - terminated
+          - error
+        resolution:
+          type: array
+          nullable: true
+          items:
+            type: integer
+    StartInstanceRequest:
+      type: object
+      properties:
+        instance_type:
+          type: string
+          enum:
+          - ubuntu
+          - browser
+          - windows
+          default: ubuntu
+        timeout_hours:
+          type: number
+          minimum: 0.01
+          maximum: 24
+        blocked_domains:
+          type: array
+          items:
+            type: string
+        resolution:
+          type: array
+          items:
+            type: integer
+          minItems: 2
+          maxItems: 2
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

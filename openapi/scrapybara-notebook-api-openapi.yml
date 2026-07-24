@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States Notebook API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Notebook
+paths:
+  /instances/{instance_id}/notebooks/kernels:
+    get:
+      operationId: listKernels
+      tags:
+      - Notebook
+      summary: List kernels
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: List of kernels
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /instances/{instance_id}/notebooks:
+    post:
+      operationId: createNotebook
+      tags:
+      - Notebook
+      summary: Create notebook
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                kernel_name:
+                  type: string
+      responses:
+        '200':
+          description: Notebook created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+  /instances/{instance_id}/notebooks/{notebook_id}:
+    get:
+      operationId: getNotebook
+      tags:
+      - Notebook
+      summary: Get notebook
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/NotebookId'
+      responses:
+        '200':
+          description: Notebook details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+    delete:
+      operationId: deleteNotebook
+      tags:
+      - Notebook
+      summary: Delete notebook
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/NotebookId'
+      responses:
+        '200':
+          description: Notebook deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+  /instances/{instance_id}/notebooks/{notebook_id}/cells:
+    post:
+      operationId: addCell
+      tags:
+      - Notebook
+      summary: Add cell
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/NotebookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - code
+                  - markdown
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Cell added
+          content:
+            application/json:
+              schema:
+                type: object
+  /instances/{instance_id}/notebooks/{notebook_id}/cells/{cell_id}/execute:
+    post:
+      operationId: executeCell
+      tags:
+      - Notebook
+      summary: Execute cell
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/NotebookId'
+      - name: cell_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Cell execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+  /instances/{instance_id}/notebooks/{notebook_id}/execute:
+    post:
+      operationId: executeNotebook
+      tags:
+      - Notebook
+      summary: Execute all cells
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      - $ref: '#/components/parameters/NotebookId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                timeout:
+                  type: integer
+      responses:
+        '200':
+          description: Notebook execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookResponse'
+components:
+  schemas:
+    CommandResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        error:
+          type: string
+        exit_code:
+          type: integer
+    NotebookResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        kernel_name:
+          type: string
+        cells:
+          type: array
+          items:
+            type: object
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+    NotebookId:
+      name: notebook_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

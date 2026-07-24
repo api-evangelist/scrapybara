@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: Scrapybara Auth States Browser API
+  description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
+  termsOfService: https://scrapybara.com/terms
+  contact:
+    name: Scrapybara Support
+    url: https://scrapybara.com
+    email: hello@scrapybara.com
+  version: '1.0'
+servers:
+- url: https://api.scrapybara.com/v1
+  description: Scrapybara production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Browser
+paths:
+  /instances/{instance_id}/browser/start:
+    post:
+      operationId: startBrowser
+      tags:
+      - Browser
+      summary: Start browser
+      description: Start a Chromium browser on the instance.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Browser started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cdp_url:
+                    type: string
+                    format: uri
+  /instances/{instance_id}/browser/stop:
+    post:
+      operationId: stopBrowser
+      tags:
+      - Browser
+      summary: Stop browser
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Browser stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+  /instances/{instance_id}/browser/cdp-url:
+    get:
+      operationId: getCdpUrl
+      tags:
+      - Browser
+      summary: Get CDP URL
+      description: Get the Playwright Chrome DevTools Protocol URL for the browser.
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: CDP URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cdp_url:
+                    type: string
+                    format: uri
+  /instances/{instance_id}/browser/current-url:
+    get:
+      operationId: getCurrentUrl
+      tags:
+      - Browser
+      summary: Get current URL
+      parameters:
+      - $ref: '#/components/parameters/InstanceId'
+      responses:
+        '200':
+          description: Current URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current_url:
+                    type: string
+                    format: uri
+components:
+  schemas:
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
