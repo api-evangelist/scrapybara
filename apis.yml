@@ -8,7 +8,20 @@ description: Scrapybara provides virtual desktops for AI agents - remote Ubuntu,
   keyboard / mouse actions, drives Chromium over Playwright CDP, executes bash and
   code, manages the filesystem and Jupyter notebooks, and saves reusable browser auth
   states.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/scrapybara.png
 tags:
 - AI Agents
 - Virtual Desktops
@@ -19,149 +32,230 @@ created: '2026-07-01'
 modified: '2026-07-01'
 specificationVersion: '0.19'
 apis:
-- aid: scrapybara:scrapybara-instances-api
-  name: Scrapybara Instances API
-  tags:
-  - Instances
-  - Virtual Desktops
-  - Ubuntu
-  - Browser
-  - Windows
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/api-reference/start
-  baseURL: https://api.scrapybara.com/v1
-  properties:
-  - url: https://docs.scrapybara.com/api-reference/start
-    type: Documentation
-  - url: https://docs.scrapybara.com/api-reference/start
-    type: APIReference
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Start, get, list, stop, pause, and resume cloud instances of type ubuntu,
-    browser, or windows, with configurable timeout hours, blocked domains, and screen
-    resolution. Paused instances preserve state and can be resumed later.
-- aid: scrapybara:scrapybara-computer-actions-api
-  name: Scrapybara Computer Actions API
-  tags:
-  - Computer Use
-  - Screenshot
-  - Mouse
-  - Keyboard
-  - Streaming
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/ubuntu
-  baseURL: https://api.scrapybara.com/v1
-  properties:
-  - url: https://docs.scrapybara.com/ubuntu
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Drive a running desktop the way a human would - take a screenshot, get
-    the interactive stream URL, and run computer actions (move mouse, click, drag,
-    scroll, type text, press key combinations, wait) that computer-use models call
-    directly.
-- aid: scrapybara:scrapybara-browser-api
-  name: Scrapybara Browser API
-  tags:
-  - Browser Automation
-  - Playwright
-  - CDP
-  - Chromium
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/browser
-  baseURL: https://api.scrapybara.com/v1
-  properties:
-  - url: https://docs.scrapybara.com/browser
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Start and stop a Chromium browser on an instance, retrieve its Playwright
-    Chrome DevTools Protocol (CDP) URL for programmatic control, read the current URL,
-    and authenticate the browser with a previously saved auth state.
-- aid: scrapybara:scrapybara-code-execution-api
-  name: Scrapybara Code Execution API
-  tags:
-  - Code Execution
-  - Bash
-  - Sandbox
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/code-execution
-  baseURL: https://api.scrapybara.com/v1
-  properties:
-  - url: https://docs.scrapybara.com/code-execution
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Run bash commands and execute arbitrary code against a named kernel
-    on an instance, capturing stdout, stderr, and results for agent workflows and
-    data processing.
-- aid: scrapybara:scrapybara-filesystem-api
-  name: Scrapybara Filesystem API
-  tags:
-  - Filesystem
-  - Files
-  - Upload
-  - Edit
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/filesystem
-  baseURL: https://api.scrapybara.com/v1
-  properties:
-  - url: https://docs.scrapybara.com/filesystem
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Read, write, list, and manipulate files on an instance via file and
-    edit actions, and upload binary files directly into the instance filesystem for
-    agents to operate on.
-- aid: scrapybara:scrapybara-notebook-api
-  name: Scrapybara Notebook API
-  tags:
-  - Jupyter
-  - Notebooks
-  - Kernels
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/notebooks
-  baseURL: https://api.scrapybara.com/v1
-  properties:
-  - url: https://docs.scrapybara.com/notebooks
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Create and manage Jupyter notebooks on an instance - list kernels, create
-    and delete notebooks, add cells, and execute individual cells or the whole notebook.
 - aid: scrapybara:scrapybara-auth-states-api
   name: Scrapybara Auth States API
+  description: The Auth States API from Scrapybara — 4 operation(s) for auth states.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
   tags:
   - Auth States
-  - Sessions
-  - Cookies
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/browser#auth-states
-  baseURL: https://api.scrapybara.com/v1
   properties:
-  - url: https://docs.scrapybara.com/browser#auth-states
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Save the current browser session as a reusable auth state, list saved
-    auth states, and modify them, so agents can skip repeated logins by replaying
-    cookies and local storage across instances.
+  - type: OpenAPI
+    url: openapi/scrapybara-auth-states-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
+- aid: scrapybara:scrapybara-browser-api
+  name: Scrapybara Browser API
+  description: The Browser API from Scrapybara — 4 operation(s) for browser.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Browser
+  properties:
+  - type: OpenAPI
+    url: openapi/scrapybara-browser-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
+- aid: scrapybara:scrapybara-code-execution-api
+  name: Scrapybara Code Execution API
+  description: The Code Execution API from Scrapybara — 2 operation(s) for code execution.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Code Execution
+  properties:
+  - type: OpenAPI
+    url: openapi/scrapybara-code-execution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
+- aid: scrapybara:scrapybara-computer-actions-api
+  name: Scrapybara Computer Actions API
+  description: The Computer Actions API from Scrapybara — 3 operation(s) for computer actions.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Computer Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/scrapybara-computer-actions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
 - aid: scrapybara:scrapybara-environment-api
   name: Scrapybara Environment API
-  tags:
-  - Environment Variables
-  - Configuration
-  - Secrets
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.scrapybara.com/environment-variables
+  description: The Environment API from Scrapybara — 1 operation(s) for environment.
+  humanURL: https://docs.scrapybara.com/api-reference/start
   baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Environment
   properties:
-  - url: https://docs.scrapybara.com/environment-variables
-    type: Documentation
-  - url: openapi/scrapybara-openapi.yml
-    type: OpenAPI
-  description: Get, set, and delete environment variables on a running instance so
-    agents and executed code can read API keys and configuration at runtime.
+  - type: OpenAPI
+    url: openapi/scrapybara-environment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
+- aid: scrapybara:scrapybara-filesystem-api
+  name: Scrapybara Filesystem API
+  description: The Filesystem API from Scrapybara — 3 operation(s) for filesystem.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Filesystem
+  properties:
+  - type: OpenAPI
+    url: openapi/scrapybara-filesystem-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
+- aid: scrapybara:scrapybara-instances-api
+  name: Scrapybara Instances API
+  description: The Instances API from Scrapybara — 6 operation(s) for instances.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/scrapybara-instances-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
+- aid: scrapybara:scrapybara-notebook-api
+  name: Scrapybara Notebook API
+  description: The Notebook API from Scrapybara — 6 operation(s) for notebook.
+  humanURL: https://docs.scrapybara.com/api-reference/start
+  baseURL: https://api.scrapybara.com/v1
+  tags:
+  - Notebook
+  properties:
+  - type: OpenAPI
+    url: openapi/scrapybara-notebook-api-openapi.yml
+  - type: Documentation
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: APIReference
+    url: https://docs.scrapybara.com/api-reference/start
+  - type: Documentation
+    url: https://docs.scrapybara.com/ubuntu
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser
+  - type: Documentation
+    url: https://docs.scrapybara.com/code-execution
+  - type: Documentation
+    url: https://docs.scrapybara.com/filesystem
+  - type: Documentation
+    url: https://docs.scrapybara.com/notebooks
+  - type: Documentation
+    url: https://docs.scrapybara.com/browser#auth-states
+  - type: Documentation
+    url: https://docs.scrapybara.com/environment-variables
 common:
 - type: AgenticAccess
   url: agentic-access/scrapybara-agentic-access.yml
