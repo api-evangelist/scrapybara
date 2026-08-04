@@ -1,0 +1,28 @@
+{
+  "provider": "scrapybara",
+  "sources": [
+    "scrapybara-auth-states-api-openapi.yml",
+    "scrapybara-browser-api-openapi.yml",
+    "scrapybara-code-execution-api-openapi.yml",
+    "scrapybara-computer-actions-api-openapi.yml",
+    "scrapybara-environment-api-openapi.yml",
+    "scrapybara-filesystem-api-openapi.yml",
+    "scrapybara-instances-api-openapi.yml",
+    "scrapybara-notebook-api-openapi.yml"
+  ],
+  "outputs": [
+    "scrapybara-auth-states-api-openapi.yml",
+    "scrapybara-browser-api-openapi.yml",
+    "scrapybara-code-execution-api-openapi.yml",
+    "scrapybara-computer-actions-api-openapi.yml",
+    "scrapybara-environment-api-openapi.yml",
+    "scrapybara-filesystem-api-openapi.yml",
+    "scrapybara-instances-api-openapi.yml",
+    "scrapybara-notebook-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
