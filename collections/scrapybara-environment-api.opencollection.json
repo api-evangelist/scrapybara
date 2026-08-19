@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scrapybara Auth States Environment API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get environment variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/env",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get environment variables"
+        },
+        {
+          "info": {
+            "name": "Set environment variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/env",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set environment variables"
+        },
+        {
+          "info": {
+            "name": "Delete environment variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/env",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete environment variables"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

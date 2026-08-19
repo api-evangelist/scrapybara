@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scrapybara Auth States API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth States",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Save auth state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/save-auth",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save the current browser session as a reusable auth state."
+        },
+        {
+          "info": {
+            "name": "Authenticate with saved state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/authenticate",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Load a previously saved auth state into the browser session."
+        },
+        {
+          "info": {
+            "name": "Modify auth state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/auth-states/:auth_state_id",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "auth_state_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify auth state"
+        },
+        {
+          "info": {
+            "name": "List auth states",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/auth-states"
+          },
+          "docs": "List auth states"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

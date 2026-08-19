@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scrapybara Auth States Browser API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Browser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start browser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/start",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Start a Chromium browser on the instance."
+        },
+        {
+          "info": {
+            "name": "Stop browser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/stop",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop browser"
+        },
+        {
+          "info": {
+            "name": "Get CDP URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/cdp-url",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Playwright Chrome DevTools Protocol URL for the browser."
+        },
+        {
+          "info": {
+            "name": "Get current URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/browser/current-url",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get current URL"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

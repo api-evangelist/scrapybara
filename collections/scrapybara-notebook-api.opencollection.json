@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scrapybara Auth States Notebook API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notebook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List kernels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/kernels",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List kernels"
+        },
+        {
+          "info": {
+            "name": "Create notebook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create notebook"
+        },
+        {
+          "info": {
+            "name": "Get notebook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notebook_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get notebook"
+        },
+        {
+          "info": {
+            "name": "Delete notebook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notebook_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete notebook"
+        },
+        {
+          "info": {
+            "name": "Add cell",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id/cells",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notebook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add cell"
+        },
+        {
+          "info": {
+            "name": "Execute cell",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id/cells/:cell_id/execute",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notebook_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cell_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Execute cell"
+        },
+        {
+          "info": {
+            "name": "Execute all cells",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/notebooks/:notebook_id/execute",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notebook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute all cells"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

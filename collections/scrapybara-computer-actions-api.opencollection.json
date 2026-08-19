@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Scrapybara Auth States Computer Actions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Computer Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Take screenshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/screenshot",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Capture a base64-encoded screenshot of the instance desktop."
+        },
+        {
+          "info": {
+            "name": "Get stream URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/stream-url",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the interactive streaming URL for the instance desktop."
+        },
+        {
+          "info": {
+            "name": "Run computer actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.scrapybara.com/v1/instances/:instance_id/computer",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a computer action such as move_mouse, click_mouse, drag_mouse, scroll, press_key, type_text, wait, take_screenshot, get_cursor_position."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
