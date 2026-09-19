@@ -246,6 +246,8 @@ apis:
   humanURL: https://docs.scrapybara.com/api-reference/start
   baseURL: https://api.scrapybara.com/v1
   tags:
+  - Notebooks
+  tags_raw:
   - Notebook
   properties:
   - type: OpenAPI
