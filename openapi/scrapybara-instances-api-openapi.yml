@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Scrapybara Auth States Instances API
+  title: Scrapybara Instances API
   description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
   termsOfService: https://scrapybara.com/terms
   contact:
@@ -127,34 +127,6 @@ paths:
                 $ref: '#/components/schemas/InstanceResponse'
 components:
   schemas:
-    InstanceResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        launch_time:
-          type: string
-          format: date-time
-        instance_type:
-          type: string
-          enum:
-          - ubuntu
-          - browser
-          - windows
-        status:
-          type: string
-          enum:
-          - pending
-          - running
-          - paused
-          - resuming
-          - terminated
-          - error
-        resolution:
-          type: array
-          nullable: true
-          items:
-            type: integer
     StartInstanceRequest:
       type: object
       properties:
@@ -179,6 +151,35 @@ components:
             type: integer
           minItems: 2
           maxItems: 2
+    InstanceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        launch_time:
+          type: string
+          format: date-time
+        instance_type:
+          type: string
+          enum:
+          - ubuntu
+          - browser
+          - windows
+        status:
+          type: string
+          enum:
+          - pending
+          - running
+          - paused
+          - resuming
+          - terminated
+          - error
+        resolution:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
     StatusResponse:
       type: object
       properties:

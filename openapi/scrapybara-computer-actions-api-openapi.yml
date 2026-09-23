@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Scrapybara Auth States Computer Actions API
+  title: Scrapybara Computer Actions API
   description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
   termsOfService: https://scrapybara.com/terms
   contact:
@@ -79,17 +79,6 @@ paths:
                 $ref: '#/components/schemas/ComputerActionResponse'
 components:
   schemas:
-    ComputerActionResponse:
-      type: object
-      properties:
-        output:
-          type: string
-        base_64_image:
-          type: string
-        cursor_position:
-          type: array
-          items:
-            type: integer
     ComputerActionRequest:
       type: object
       properties:
@@ -123,6 +112,17 @@ components:
             type: string
         duration:
           type: number
+    ComputerActionResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        base_64_image:
+          type: string
+        cursor_position:
+          type: array
+          items:
+            type: integer
   parameters:
     InstanceId:
       name: instance_id

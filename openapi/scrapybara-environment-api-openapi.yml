@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Scrapybara Auth States Environment API
+  title: Scrapybara Environment API
   description: Scrapybara provides virtual desktops for AI agents. This representative OpenAPI describes the public REST surface for starting and managing cloud instances (ubuntu / browser / windows), running computer actions, driving a Chromium browser over Playwright CDP, executing bash and code, managing the filesystem and Jupyter notebooks, saving browser auth states, and setting instance environment variables. All requests authenticate with the `x-api-key` header.
   termsOfService: https://scrapybara.com/terms
   contact:
@@ -87,12 +87,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/StatusResponse'
 components:
-  schemas:
-    StatusResponse:
-      type: object
-      properties:
-        status:
-          type: string
   parameters:
     InstanceId:
       name: instance_id
@@ -100,6 +94,12 @@ components:
       required: true
       schema:
         type: string
+  schemas:
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

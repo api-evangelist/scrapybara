@@ -1,14 +1,7 @@
 {
   "provider": "scrapybara",
   "sources": [
-    "scrapybara-auth-states-api-openapi.yml",
-    "scrapybara-browser-api-openapi.yml",
-    "scrapybara-code-execution-api-openapi.yml",
-    "scrapybara-computer-actions-api-openapi.yml",
-    "scrapybara-environment-api-openapi.yml",
-    "scrapybara-filesystem-api-openapi.yml",
-    "scrapybara-instances-api-openapi.yml",
-    "scrapybara-notebook-api-openapi.yml"
+    "_original/scrapybara-openapi.yml"
   ],
   "outputs": [
     "scrapybara-auth-states-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "scrapybara-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "scrapybara-auth-states-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-browser-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-code-execution-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-computer-actions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-environment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-filesystem-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "scrapybara-notebook-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
