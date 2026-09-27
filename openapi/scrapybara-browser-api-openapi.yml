@@ -91,6 +91,12 @@ paths:
                     type: string
                     format: uri
 components:
+  schemas:
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
   parameters:
     InstanceId:
       name: instance_id
@@ -98,12 +104,6 @@ components:
       required: true
       schema:
         type: string
-  schemas:
-    StatusResponse:
-      type: object
-      properties:
-        status:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

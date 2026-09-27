@@ -127,30 +127,6 @@ paths:
                 $ref: '#/components/schemas/InstanceResponse'
 components:
   schemas:
-    StartInstanceRequest:
-      type: object
-      properties:
-        instance_type:
-          type: string
-          enum:
-          - ubuntu
-          - browser
-          - windows
-          default: ubuntu
-        timeout_hours:
-          type: number
-          minimum: 0.01
-          maximum: 24
-        blocked_domains:
-          type: array
-          items:
-            type: string
-        resolution:
-          type: array
-          items:
-            type: integer
-          minItems: 2
-          maxItems: 2
     InstanceResponse:
       type: object
       properties:
@@ -185,6 +161,30 @@ components:
       properties:
         status:
           type: string
+    StartInstanceRequest:
+      type: object
+      properties:
+        instance_type:
+          type: string
+          enum:
+          - ubuntu
+          - browser
+          - windows
+          default: ubuntu
+        timeout_hours:
+          type: number
+          minimum: 0.01
+          maximum: 24
+        blocked_domains:
+          type: array
+          items:
+            type: string
+        resolution:
+          type: array
+          items:
+            type: integer
+          minItems: 2
+          maxItems: 2
   parameters:
     InstanceId:
       name: instance_id

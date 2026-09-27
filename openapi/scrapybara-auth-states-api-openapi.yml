@@ -111,19 +111,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/AuthStateResponse'
 components:
-  parameters:
-    InstanceId:
-      name: instance_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    StatusResponse:
-      type: object
-      properties:
-        status:
-          type: string
     AuthStateResponse:
       type: object
       properties:
@@ -131,6 +119,18 @@ components:
           type: string
         name:
           type: string
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

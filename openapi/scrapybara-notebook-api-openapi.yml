@@ -181,11 +181,6 @@ components:
           type: array
           items:
             type: object
-    StatusResponse:
-      type: object
-      properties:
-        status:
-          type: string
     CommandResponse:
       type: object
       properties:
@@ -195,15 +190,20 @@ components:
           type: string
         exit_code:
           type: integer
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
   parameters:
-    InstanceId:
-      name: instance_id
+    NotebookId:
+      name: notebook_id
       in: path
       required: true
       schema:
         type: string
-    NotebookId:
-      name: notebook_id
+    InstanceId:
+      name: instance_id
       in: path
       required: true
       schema:

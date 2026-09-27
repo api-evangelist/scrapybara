@@ -78,7 +78,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/ComputerActionResponse'
 components:
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    ComputerActionResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        base_64_image:
+          type: string
+        cursor_position:
+          type: array
+          items:
+            type: integer
     ComputerActionRequest:
       type: object
       properties:
@@ -112,24 +130,6 @@ components:
             type: string
         duration:
           type: number
-    ComputerActionResponse:
-      type: object
-      properties:
-        output:
-          type: string
-        base_64_image:
-          type: string
-        cursor_position:
-          type: array
-          items:
-            type: integer
-  parameters:
-    InstanceId:
-      name: instance_id
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
