@@ -78,13 +78,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ComputerActionResponse'
 components:
-  parameters:
-    InstanceId:
-      name: instance_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     ComputerActionResponse:
       type: object
@@ -130,6 +123,13 @@ components:
             type: string
         duration:
           type: number
+  parameters:
+    InstanceId:
+      name: instance_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
