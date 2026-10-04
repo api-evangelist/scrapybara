@@ -168,11 +168,6 @@ paths:
                 $ref: '#/components/schemas/NotebookResponse'
 components:
   schemas:
-    StatusResponse:
-      type: object
-      properties:
-        status:
-          type: string
     NotebookResponse:
       type: object
       properties:
@@ -195,15 +190,20 @@ components:
           type: string
         exit_code:
           type: integer
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
   parameters:
-    NotebookId:
-      name: notebook_id
+    InstanceId:
+      name: instance_id
       in: path
       required: true
       schema:
         type: string
-    InstanceId:
-      name: instance_id
+    NotebookId:
+      name: notebook_id
       in: path
       required: true
       schema:

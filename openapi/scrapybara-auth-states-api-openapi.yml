@@ -112,17 +112,17 @@ paths:
                   $ref: '#/components/schemas/AuthStateResponse'
 components:
   schemas:
+    StatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
     AuthStateResponse:
       type: object
       properties:
         id:
           type: string
         name:
-          type: string
-    StatusResponse:
-      type: object
-      properties:
-        status:
           type: string
   parameters:
     InstanceId:
