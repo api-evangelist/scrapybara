@@ -1,0 +1,28 @@
+slug: scrapybara
+provider: Scrapybara
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Instances
+  spec_file: scrapybara-instances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''POST /start startInstance Start instance'', ''GET /instances List all instances'', ''stopInstance'',
+    ''pauseInstance'', ''resumeInstance''; description: ''starting and managing cloud instances (ubuntu
+    / browser / windows)'''
+  reason: The operations are the full lifecycle of cloud compute instances (start, list, stop, pause,
+    resume), which is cloud/compute infrastructure provisioning — IT Infrastructure Management. Confidence
+    held at 0.7 because it could equally be read as pure developer tooling rather than an enterprise infrastructure
+    capability.

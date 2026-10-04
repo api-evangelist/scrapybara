@@ -271,6 +271,9 @@ apis:
   - type: Documentation
     url: https://docs.scrapybara.com/environment-variables
 common:
+- type: CapabilityMap
+  url: capabilities/scrapybara-capability-edges.yml
+  name: Scrapybara Business Capability Map
 - type: AgenticAccess
   url: agentic-access/scrapybara-agentic-access.yml
 - type: DomainSecurity
