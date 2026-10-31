@@ -1,4 +1,4 @@
-# Scrapybara (scrapybara)
+# Scrapybara
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,201 +66,130 @@
 
 Scrapybara provides virtual desktops for AI agents - remote Ubuntu, browser, and Windows instances that computer-use models can see and control. A single x-api-key REST API starts and manages cloud instances, streams the desktop, runs computer / keyboard / mouse actions, drives Chromium over Playwright CDP, executes bash and code, manages the filesystem and Jupyter notebooks, and saves reusable browser auth states.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/scrapybara/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/scrapybara/refs/heads/main/apis.yml)
+**Areas:** AI Agents · Virtual Desktops · Computer Use · Browser Automation · Code Execution
 
-## Tags
+## Scrapybara on APIs.io
 
-- AI Agents
-- Virtual Desktops
-- Computer Use
-- Browser Automation
-- Code Execution
+Everything profiled for Scrapybara is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/scrapybara/](https://apis.io/providers/scrapybara/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (8)
 
-- **Created:** 2026-07-01
-- **Modified:** 2026-07-01
+- [Scrapybara Auth States API](https://apis.io/apis/scrapybara/scrapybara-auth-states-api/) — The Auth States API from Scrapybara — 4 operation(s) for auth states.
+- [Scrapybara Browser API](https://apis.io/apis/scrapybara/scrapybara-browser-api/) — The Browser API from Scrapybara — 4 operation(s) for browser.
+- [Scrapybara Code Execution API](https://apis.io/apis/scrapybara/scrapybara-code-execution-api/) — The Code Execution API from Scrapybara — 2 operation(s) for code execution.
+- [Scrapybara Computer Actions API](https://apis.io/apis/scrapybara/scrapybara-computer-actions-api/) — The Computer Actions API from Scrapybara — 3 operation(s) for computer actions.
+- [Scrapybara Environment API](https://apis.io/apis/scrapybara/scrapybara-environment-api/) — The Environment API from Scrapybara — 1 operation(s) for environment.
+- [Scrapybara Filesystem API](https://apis.io/apis/scrapybara/scrapybara-filesystem-api/) — The Filesystem API from Scrapybara — 3 operation(s) for filesystem.
+- [Scrapybara Instances API](https://apis.io/apis/scrapybara/scrapybara-instances-api/) — The Instances API from Scrapybara — 6 operation(s) for instances.
+- [Scrapybara Notebook API](https://apis.io/apis/scrapybara/scrapybara-notebook-api/) — The Notebook API from Scrapybara — 6 operation(s) for notebook.
 
-## APIs
+### Published properties
 
-### Scrapybara Instances API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Start, get, list, stop, pause, and resume cloud instances of type ubuntu, browser, or windows, with configurable timeout hours, blocked domains, and screen resolution. Paused instances preserve state and can be resumed later.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.scrapybara.com/api-reference/start](https://docs.scrapybara.com/api-reference/start)
-- **Base URL:** `https://api.scrapybara.com/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Scrapybara Agentic Access](https://apis.io/agentic-access/scrapybara/scrapybara-agentic-access/)
 
-- Instances
-- Virtual Desktops
-- Ubuntu
-- Browser
-- Windows
+#### Collections (9)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.scrapybara.com/api-reference/start)
-- [API Reference](https://docs.scrapybara.com/api-reference/start)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Scrapybara API](https://apis.io/collections/scrapybara/open-scrapybara/)
+- [Scrapybara Auth States API](https://apis.io/collections/scrapybara/open-scrapybara-auth-states-api/)
+- [Scrapybara Auth States Browser API](https://apis.io/collections/scrapybara/open-scrapybara-browser-api/)
+- [Scrapybara Auth States Code Execution API](https://apis.io/collections/scrapybara/open-scrapybara-code-execution-api/)
+- [Scrapybara Auth States Computer Actions API](https://apis.io/collections/scrapybara/open-scrapybara-computer-actions-api/)
+- [Scrapybara Auth States Environment API](https://apis.io/collections/scrapybara/open-scrapybara-environment-api/)
+- [Scrapybara Auth States Filesystem API](https://apis.io/collections/scrapybara/open-scrapybara-filesystem-api/)
+- [Scrapybara Auth States Instances API](https://apis.io/collections/scrapybara/open-scrapybara-instances-api/)
+- [Scrapybara Auth States Notebook API](https://apis.io/collections/scrapybara/open-scrapybara-notebook-api/)
 
-### Scrapybara Computer Actions API
+#### Security (2)
 
-Drive a running desktop the way a human would - take a screenshot, get the interactive stream URL, and run computer actions (move mouse, click, drag, scroll, type text, press key combinations, wait) that computer-use models call directly.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.scrapybara.com/ubuntu](https://docs.scrapybara.com/ubuntu)
-- **Base URL:** `https://api.scrapybara.com/v1`
+- [Scrapybara Authentication](https://apis.io/security/scrapybara/scrapybara-authentication/)
+- [Scrapybara Domain Security](https://apis.io/security/scrapybara/scrapybara-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Computer Use
-- Screenshot
-- Mouse
-- Keyboard
-- Streaming
+Published plans, tiers and prices.
 
-#### Properties
+- [Scrapybara Plans Pricing](https://apis.io/plans/scrapybara/scrapybara-plans-pricing/)
 
-- [Documentation](https://docs.scrapybara.com/ubuntu)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Scrapybara Browser API
+Published request limits.
 
-Start and stop a Chromium browser on an instance, retrieve its Playwright Chrome DevTools Protocol (CDP) URL for programmatic control, read the current URL, and authenticate the browser with a previously saved auth state.
+- [Scrapybara Rate Limits](https://apis.io/rate-limits/scrapybara/scrapybara-rate-limits/)
 
-- **Human URL:** [https://docs.scrapybara.com/browser](https://docs.scrapybara.com/browser)
-- **Base URL:** `https://api.scrapybara.com/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Browser Automation
-- Playwright
-- CDP
-- Chromium
+- [Scrapybara Finops](https://apis.io/finops/scrapybara/scrapybara-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.scrapybara.com/browser)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Scrapybara Code Execution API
-
-Run bash commands and execute arbitrary code against a named kernel on an instance, capturing stdout, stderr, and results for agent workflows and data processing.
-
-- **Human URL:** [https://docs.scrapybara.com/code-execution](https://docs.scrapybara.com/code-execution)
-- **Base URL:** `https://api.scrapybara.com/v1`
-
-#### Tags
-
-- Code Execution
-- Bash
-- Sandbox
-
-#### Properties
-
-- [Documentation](https://docs.scrapybara.com/code-execution)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Scrapybara Filesystem API
-
-Read, write, list, and manipulate files on an instance via file and edit actions, and upload binary files directly into the instance filesystem for agents to operate on.
-
-- **Human URL:** [https://docs.scrapybara.com/filesystem](https://docs.scrapybara.com/filesystem)
-- **Base URL:** `https://api.scrapybara.com/v1`
-
-#### Tags
-
-- Filesystem
-- Files
-- Upload
-- Edit
-
-#### Properties
-
-- [Documentation](https://docs.scrapybara.com/filesystem)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Scrapybara Notebook API
-
-Create and manage Jupyter notebooks on an instance - list kernels, create and delete notebooks, add cells, and execute individual cells or the whole notebook.
-
-- **Human URL:** [https://docs.scrapybara.com/notebooks](https://docs.scrapybara.com/notebooks)
-- **Base URL:** `https://api.scrapybara.com/v1`
-
-#### Tags
-
-- Jupyter
-- Notebooks
-- Kernels
-
-#### Properties
-
-- [Documentation](https://docs.scrapybara.com/notebooks)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Scrapybara Auth States API
-
-Save the current browser session as a reusable auth state, list saved auth states, and modify them, so agents can skip repeated logins by replaying cookies and local storage across instances.
-
-- **Human URL:** [https://docs.scrapybara.com/browser#auth-states](https://docs.scrapybara.com/browser#auth-states)
-- **Base URL:** `https://api.scrapybara.com/v1`
-
-#### Tags
-
-- Auth States
-- Sessions
-- Cookies
-
-#### Properties
-
-- [Documentation](https://docs.scrapybara.com/browser#auth-states)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Scrapybara Environment API
-
-Get, set, and delete environment variables on a running instance so agents and executed code can read API keys and configuration at runtime.
-
-- **Human URL:** [https://docs.scrapybara.com/environment-variables](https://docs.scrapybara.com/environment-variables)
-- **Base URL:** `https://api.scrapybara.com/v1`
-
-#### Tags
-
-- Environment Variables
-- Configuration
-- Secrets
-
-#### Properties
-
-- [Documentation](https://docs.scrapybara.com/environment-variables)
-- [OpenAPI](openapi/scrapybara-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/scrapybara.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/scrapybara.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/scrapybara)
-- [LinkedIn](https://www.linkedin.com/company/scrapybara)
 - [Website](https://scrapybara.com/)
 - [Documentation](https://docs.scrapybara.com)
-- [Plans](plans/scrapybara-plans-pricing.yml)
-- [Rate Limits](rate-limits/scrapybara-rate-limits.yml)
-- [Fin Ops](finops/scrapybara-finops.yml)
+- [Blog](https://scrapybara.com/blog)
+- [GitHub](https://github.com/scrapybara)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/scrapybara/](https://apis.io/providers/scrapybara/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Scrapybara: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/scrapybara/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
